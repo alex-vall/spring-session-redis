@@ -1,0 +1,17 @@
+group 'com.vall.springtest'
+version '1.0-SNAPSHOT'
+
+
+dependencies {
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    // end::jetty[]
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

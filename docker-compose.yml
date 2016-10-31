@@ -1,0 +1,14 @@
+redis:
+  image: redis
+  container_name: redis
+  ports:
+    - "6379:6379"
+  restart: always
+
+game-server:
+  image: game-server
+  ports:
+    - "8085:8080"
+  links:
+    - redis
+

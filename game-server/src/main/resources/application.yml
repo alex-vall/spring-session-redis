@@ -1,0 +1,4 @@
+logging:
+  level.org.springframework.cloud: DEBUG
+  level.org.springframework.web: DEBUG
+  level.com.vall.gameserver: DEBUG

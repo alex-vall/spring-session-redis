@@ -1,0 +1,63 @@
+group 'com.vall.springtest'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+//        mavenCentral()
+                jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+allprojects {
+//    apply plugin: 'io.spring.dependency-management'
+//    apply plugin: 'provided-base'
+
+    repositories {
+//        mavenCentral()
+        jcenter()
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'spring-boot'
+
+    jar {
+        archiveName = project.name + ".jar"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+
+//        compile 'org.springframework.cloud:spring-cloud-starter-consul-all:1.1.0.RELEASE'
+
+        compile 'com.fasterxml.jackson.core:jackson-core:2.8.3'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.8.3'
+        compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.3'
+
+    }
+
+    task dockerBuild << {
+        exec {
+            commandLine 'docker', 'build', '--force-rm=true', "--tag='${project.name}'", '.'
+        }
+    }
+
+    dockerBuild.dependsOn build
+
+}
+
+
+
+
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.11'
+//}
