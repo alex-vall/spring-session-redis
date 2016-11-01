@@ -12,14 +12,21 @@ import java.util.Map;
  */
 public class GameServerObject implements Serializable {
 
-    private final Map<String, String> requestMap;
-    private final Map<String, String> responseMap;
+    private final Map<Integer, String> requestMap;
+    private final Map<Integer, String> responseMap;
 
     private final List<Integer> resultList;
 
-    public GameServerObject() {
-        requestMap = new HashMap<String, String>();
-        responseMap = new HashMap<String, String>();
+    private boolean isProcessingNow = false;
+
+    private final String playerID;
+
+    public GameServerObject(String playerID) {
+
+        this.playerID = playerID;
+
+        requestMap = new HashMap<>();
+        responseMap = new HashMap<>();
 
         resultList = new ArrayList<Integer>();
     }
@@ -28,12 +35,24 @@ public class GameServerObject implements Serializable {
         return resultList;
     }
 
-    public Map<String, String> getRequestMap() {
+    public Map<Integer, String> getRequestMap() {
         return requestMap;
     }
 
-    public Map<String, String> getResponseMap() {
+    public Map<Integer, String> getResponseMap() {
         return responseMap;
+    }
+
+    public boolean isProcessingNow() {
+        return isProcessingNow;
+    }
+
+    public void setProcessingNow(boolean processingNow) {
+        isProcessingNow = processingNow;
+    }
+
+    public String getPlayerID() {
+        return playerID;
     }
 
     @Override
@@ -42,6 +61,8 @@ public class GameServerObject implements Serializable {
                 "requestMap=" + requestMap +
                 ", responseMap=" + responseMap +
                 ", resultList=" + resultList +
+                ", isProcessingNow=" + isProcessingNow +
+                ", playerID='" + playerID + '\'' +
                 '}';
     }
 }
