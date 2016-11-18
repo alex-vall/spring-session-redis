@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./gradlew game-server:dB
+gradle game-server:dB -x test
 docker-compose up -d game-server
